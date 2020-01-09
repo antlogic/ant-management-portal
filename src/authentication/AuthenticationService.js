@@ -18,14 +18,16 @@ class AuthenticationService {
             method: 'POST'
         };
 
-        fetch(URL, otherParam)
+        return fetch(URL, otherParam)
             .then(data=>{
                 return data.json();
             }).then(result =>{
                 sessionStorage.setItem('authenticatedUser', result.tokenType + " " + result.accessToken);
+                return true;
             }).catch(err=>{
                 console.log("ERROR");
                 console.log(err);
+                return false;
         });
     }
 

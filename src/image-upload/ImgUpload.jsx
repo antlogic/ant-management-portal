@@ -5,7 +5,8 @@ import {
     BrowserRouter as Router,
     Redirect,
     Route,
-    Link
+    Link,
+    Switch
 } from "react-router-dom";
 import Login from "../authentication/Login";
 import SecureMessage from "./SecureMessage";
@@ -77,41 +78,48 @@ class ImgUpload extends Component {
 
   render () {
     const {ImgArray} = this.state
-    return(
-      <div>
-        <Link to='/login' onClick={this.signOut}>Sign Out</Link>
-        {this.state.LogOut ?
-            <Router>
-              <Route>
-                <Redirect to="/login" />
-                <Route path='/login/' component={Login} />
-              </Route>
-            </Router> : ''}
+
+    if (this.state.LogOut) {
+      return (
+          <Router>
+            <Route>
+              <Redirect to="/login"/>
+            </Route>
+            <Switch>
+              <Route path='/login/' component={Login}/>
+            </Switch>
+          </Router>
+      )
+    } else {
+      return (
+          <div>
+            <Link to='/login' onClick={this.signOut}>Sign Out</Link>
 
             <SecureMessage/>
-        {ImgArray.map((item, index) => 
-          <DisplayImg 
-            ImgItem={item}  
-            key={`image-key ${index}`}
-            removeImage={this.handleRemoveImage}/>
-        )}
+            {ImgArray.map((item, index) =>
+                <DisplayImg
+                    ImgItem={item}
+                    key={`image-key ${index}`}
+                    removeImage={this.handleRemoveImage}/>
+            )}
 
-        <Dropzone 
-          onDrop={this.handleOnDrop} 
-          multiple={true} 
-          accept={acceptedFileTypes}
-        >
-          {({getRootProps, getInputProps}) => (
-            <section>
-              <div {...getRootProps()}>
-                <input {...getInputProps()} />
-                <p>Drag 'n' drop some files here, or click to select files</p>
-              </div>
-            </section>
-          )}
-        </Dropzone>
-      </div>
-    )
+            <Dropzone
+                onDrop={this.handleOnDrop}
+                multiple={true}
+                accept={acceptedFileTypes}
+            >
+              {({getRootProps, getInputProps}) => (
+                  <section>
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      <p>Drag 'n' drop some files here, or click to select files</p>
+                    </div>
+                  </section>
+              )}
+            </Dropzone>
+          </div>
+      )
+    }
   }
 }
 

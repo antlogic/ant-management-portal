@@ -3,14 +3,21 @@ import AuthenticationService from './AuthenticationService.js'
 import {
 	BrowserRouter as Router,
 	Redirect,
-	Route
+	Route,
+	Switch
 } from "react-router-dom";
 import Login from './Login'
 import ImgUpload from "../image-upload/ImgUpload";
 
 class AuthenticationRoute extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			isLoggedIn: AuthenticationService.isUserLoggedIn()
+		}
+	}
 	render() {
-		if(AuthenticationService.isUserLoggedIn()) {
+		if(this.state.isLoggedIn) {
 			return (
 				<Router>
 					<Route>
@@ -22,10 +29,12 @@ class AuthenticationRoute extends Component {
 		} else {
 			return(
 				<Router>
-					<Route>
-						<Redirect to="/login" />
-						<Route path='/login/' component={Login} />
-					</Route>
+					<Switch>
+						<Route>
+							<Redirect to="/login" />
+							<Route path='/login/' component={Login} />
+						</Route>
+					</Switch>
 				</Router>
 			)
 		}
