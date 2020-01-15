@@ -8,9 +8,9 @@ import {
     Link,
     Switch
 } from "react-router-dom";
-import Login from "../authentication/Login";
+import Login from "../../components/Auth/Login";
 import SecureMessage from "./SecureMessage";
-import AuthenticationService from "../authentication/AuthenticationService";
+import AuthenticationService from "../../[DELETE] authentication/AuthenticationService";
 
 const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
 const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item) => {return item.trim()})
@@ -43,6 +43,7 @@ class ImgUpload extends Component {
   }
 
   handleOnDrop = (files, rejectedFiles) => {
+    console.log(typeof files[0]);
     for(let i = 0; i < files.length; i++){
       const currentFile = files[i]
       if(this.verifyFile(currentFile)) {
