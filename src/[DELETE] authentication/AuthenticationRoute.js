@@ -6,8 +6,8 @@ import {
 	Route,
 	Switch
 } from "react-router-dom";
-import Login from './Login'
-import ImgUpload from "../image-upload/ImgUpload";
+import Login from '../components/Auth/Login'
+import ImgUpload from "../containers/image-upload/ImgUpload";
 
 class AuthenticationRoute extends Component {
 	constructor(props) {

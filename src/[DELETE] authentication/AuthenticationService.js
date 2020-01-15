@@ -23,12 +23,15 @@ class AuthenticationService {
                 return data.json();
             }).then(result =>{
                 sessionStorage.setItem('authenticatedUser', result.tokenType + " " + result.accessToken);
+                console.log(result);
                 return true;
             }).catch(err=>{
                 console.log("ERROR");
                 console.log(err);
+                return err;
+            }).then(() => {
                 return false;
-        });
+            });
     }
 
     logout() {

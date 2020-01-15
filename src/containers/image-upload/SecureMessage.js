@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import AuthenticationService from '../authentication/AuthenticationService.js'
+import AuthenticationService from '../../[DELETE] authentication/AuthenticationService.js'
 
 class SecureMessage extends Component {
     constructor(props) {
