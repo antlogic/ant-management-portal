@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import * as actions from "../../store/actions/auth";
 import Logo from '../../assets/images/logo/logo_white.png'
 import "./auth.scss"
+import {Spinner} from "react-bootstrap";
+import Aux from '../../hoc/Aux/Aux'
 
 class Auth extends Component {
     constructor(props) {
@@ -107,13 +109,30 @@ class Auth extends Component {
                     elementType: 'input',
                     elementConfig: {
                         type: 'password',
-                        placeholder: 'Password'
+                        placeholder: 'Re-Enter Password'
                     },
                     value: '',
                     isRequired: true,
                     touched: false
                 },
             }
+        }
+    }
+
+    isInvalid(value, type){
+        console.log("type is " + /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))
+        switch (type) {
+            case 'text':
+                return !value
+            case 'tel':
+                return isNaN(value) || !value
+            case 'email':
+                return ! /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)
+            case 'password':
+                return (value.length <= 6);
+            default:
+                return true;
+
         }
     }
 
@@ -126,7 +145,7 @@ class Auth extends Component {
             ...updatedState[id]
         };
         updatedElement.value = event.target.value;
-        updatedElement.touched = true;
+        updatedElement.touched = this.isInvalid(event.target.value, updatedElement.elementConfig.type)
         updatedState[id] = updatedElement;
         this.setState({
             [objectName]: updatedState
@@ -190,34 +209,42 @@ class Auth extends Component {
             });
         }
         let form = (
-            <form onSubmit={submitHandleFunction} className={formClass}>
-                <img src={Logo} />
-                <label>{"Admin " + this.props.label}</label>
-                <div className={"formContainer"}>
-                    {formInputArray.map(formInput => (
-                        <div key={formInput.id} className="column">
-                            <Input
-                                elementType={formInput.config.elementType}
-                                elementConfig={formInput.config.elementConfig}
-                                value={formInput.config.value}
-                                isRequired={formInput.config.isRequired}
-                                changed={(event) => this.handleOnChange(event, formInput.id)}/>
-                        </div>
-                    ))}
-                    <div className="column">
-                        <button className="registerFormButton" type="submit">{isLogin ? "Login" : "Sign Up"}</button>
+            <Aux>
+                {formInputArray.map(formInput => (
+                    <div key={formInput.id} className="column form__group">
+                        {/*{console.log(formInput)}*/}
+                        <Input
+                            elementType={formInput.config.elementType}
+                            elementConfig={formInput.config.elementConfig}
+                            value={formInput.config.value}
+                            isRequired={formInput.config.isRequired}
+                            changed={(event) => this.handleOnChange(event, formInput.id)}
+                            className={formInput.config.touched ? "form__field touched" : "form__field"}/>
+                            <label className="form__label">{formInput.config.elementConfig.placeholder}</label>
                     </div>
-                    <div className="column">
-                        {signUpButton}
-                    </div>
+                ))}
+                <div className="column">
+                    <button className="registerFormButton" type="submit">{isLogin ? "Login" : "Sign Up"}</button>
                 </div>
-            </form>
+                <div className="column">
+                    {signUpButton}
+                </div>
+            </Aux>
         );
-        console.log(window.outerHeight);
+
+        if(this.props.loading) {
+            form = <div className="spinner"><Spinner animation="border" role="status" /></div>
+        }
 
         return (
             <div className="loginContainer" >
-                {form}
+                <form onSubmit={submitHandleFunction} className={formClass}>
+                    <img src={Logo} alt=""/>
+                    <label className="form--heading">{"Admin " + this.props.label}</label>
+                    <div className={"formContainer"}>
+                        {form}
+                    </div>
+                </form>
             </div>
         );
     }

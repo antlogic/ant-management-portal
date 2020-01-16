@@ -10,7 +10,6 @@ import {
 } from "react-router-dom";
 import Login from "../../components/Auth/Login";
 import SecureMessage from "./SecureMessage";
-import AuthenticationService from "../../[DELETE] authentication/AuthenticationService";
 
 const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
 const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item) => {return item.trim()})
@@ -71,10 +70,7 @@ class ImgUpload extends Component {
   }
 
   signOut = () => {
-    AuthenticationService.logout()
-    this.setState({
-      LogOut: true
-    })
+
   }
 
   render () {

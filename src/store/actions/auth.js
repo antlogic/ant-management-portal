@@ -31,10 +31,12 @@ export const auth = (config, isLogin) => {
         const headers = {
             headers: config.headers
         }
+
         axios.post(url,
             config.data,
             headers)
             .then(response => {
+                console.log(response)
                 dispatch(authSuccess(response.data))
             })
             .catch(err => {

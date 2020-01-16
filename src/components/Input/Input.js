@@ -9,7 +9,9 @@ const Input = (props) => {
                 {...props.elementConfig}
                 value={props.value}
                 onChange={props.changed}
-                required={props.isRequired}/>
+                onClick={props.changed}
+                required={props.isRequired}
+                className={props.className}/>
             break;
         case ('textarea'):
             inputElement = <textarea {...props.elementConfig} required={props.isRequired}/>

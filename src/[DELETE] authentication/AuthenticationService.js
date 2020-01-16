@@ -61,7 +61,7 @@ class AuthenticationService {
             }).catch(err=>{
                 console.log("ERROR");
                 console.log(err);
-        });
+            });
     }
 }
 

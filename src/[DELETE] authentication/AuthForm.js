@@ -108,7 +108,7 @@ class AuthForm extends Component {
                                     Sign Up
                                 </Link>
                             </button>
-                        : ''}
+                            : ''}
 
                     </form>
                     <Router>

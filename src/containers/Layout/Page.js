@@ -9,7 +9,7 @@ import {
     Route,
     Switch
 } from "react-router-dom";
-import * as actions from "../../store/actions/auth";
+// import * as actions from "../../store/actions/auth";
 
 class Page extends Component {
     render() {
@@ -20,10 +20,10 @@ class Page extends Component {
                 <Redirect from="/signup" to="/register" exact component={SignUp} />
                 <Redirect from="/" to="/login" component={Login} />
             </Switch>
-         : <switch>
+         : <Switch>
                 <Route path="/dashboard" component={ImgUpload} />
                 <Redirect from="/" to="/dashboard" component={ImgUpload}/>
-            </switch>;
+            </Switch>;
 
         return (
             <BrowserRouter>
