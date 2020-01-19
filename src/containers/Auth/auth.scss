@@ -1,5 +1,74 @@
 @import "../../assets/stylesheets/variables";
 
+.form__group {
+  position: relative;
+  transition: all 200ms ease-in-out;
+}
+
+.form__field {
+  transition: border-color 0.2s;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1rem;
+    cursor: text;
+    top: 0rem;
+    left: 2.5rem;
+  }
+}
+
+.form__field.touched {
+  ~ .form__label {
+    transition: 0.2s;
+    font-size: 1rem;
+    color: $AtlantaRed;
+    font-weight:700;
+    top: -1.5rem;
+  }
+  border-top-style: solid;
+  border-right-style: solid;
+  border-left-style: solid;
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, $AtlantaRed,$AtlantaRed);
+  border-image-slice: 1;
+}
+
+.form__label {
+  position: absolute;
+  top: -1.5rem;
+  left: 2.5rem;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: $gray;
+}
+
+.form__field:focus {
+  ~ .form__label {
+    transition: 0.2s;
+    font-size: 1rem;
+    color: $AtlantaBeige;
+    font-weight:700;
+    top: -1.5rem;
+  }
+  border-top-style: solid;
+  border-right-style: solid;
+  border-left-style: solid;
+  padding-bottom: 6px;
+  font-weight: 700;
+  border-width: 3px;
+  border-image: linear-gradient(to right, $AtlantaBeige,$AtlantaYellow);
+  border-image-slice: 1;
+}
+
+
 .loginContainer {
     width: 100%;
     width: 100vw;
@@ -8,60 +77,67 @@
     position: fixed;
     top: 0;
     left: 0;
-    background:
-            linear-gradient(
-                            to right,
-                            rgba(black, .75),
-                            rgba(black, .75)
-            ),
-            url("../../assets/images/hero/mountain-backdrop.jpg") center top;
-    background-size: cover;
+    background-color: white;
 
     .loginForm{
+        overflow-y: scroll;
         width: 20rem;
-        height: 23rem;
+        height: auto;
+        padding: 2rem 0;
         input {
           display: block;
-          width: 80%;
+          //margin: 2rem auto;
         }
     }
 
     .signupForm{
+        overflow-y: scroll;
         width: 55rem;
-        height: 40rem;
+        height: auto;
 
         .column{
-          float: left;
           width: 50%;
         }
 
         input{
           display: block;
-          width: 70%;
           margin-right: auto;
           margin-left: auto;
-        }
-
-
-
-        :after{
-          content: '';
-          display: table;
-          clear: both;
         }
     }
 
     form {
         display: block;
-        background-color: darken(#323c48, 4%);
+        background-color: lighten(#323c48, 5%);
         border-radius: 10%;
         position: absolute;
+        overflow-y: scroll;
+        padding-bottom: 1.5rem;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
 
         .formContainer{
             margin: auto;
+
+            .spinner{
+              display: flex;
+              justify-content: center;
+              align-content: center;
+              width: 100%;
+              margin: 4rem 0;
+              color: $AtlantaBeige;
+            }
+        }
+
+        .column{
+          display: inline-block;
+          width: 100%;
+          height: auto;
+        }
+
+        .column.form__group{
+          margin:1.5rem 0;
         }
 
         img {
@@ -69,9 +145,10 @@
             width: 90px;
             height: 80px;
             margin: 1rem auto;
+            color: white;
         }
 
-        label {
+        .form--heading {
             display: block;
             color: $AtlantaBeige;
             text-align: center;
@@ -88,13 +165,13 @@
         }
 
         input {
-            border: none;
             border-bottom: $AtlantaBeige 1px solid;
             outline: none;
+            width: 80%;
             background: none;
             color: $AtlantaBeige;
             padding-left: 10px;
-            margin: 1rem auto;
+            margin: 0rem auto;
 
           :focus {
               background: none;
@@ -131,7 +208,7 @@
   .loginContainer {
     .loginForm {
       width: 30rem;
-      height: 35rem;
+      height: auto;
     }
     form {
       img {
@@ -140,37 +217,16 @@
         margin: 2rem auto;
       }
 
-      label {
+      .form--heading {
         font-size: 2rem;
       }
 
-      input {
+      input{
         font-size: 1.5rem;
       }
-      .registerFormButton{
-        height: 50px;
-        margin: 2rem auto;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 1300px){
-  .loginContainer{
-    .signupForm{
-      img {
-        width: 120px;
-        height: 120px;
-        margin: 2rem auto;
-      }
-
-      label {
-        font-size: 2rem;
-      }
 
       .registerFormButton{
         height: 50px;
-        margin: 2rem auto;
       }
     }
   }
@@ -180,14 +236,14 @@
   .loginContainer{
     .signupForm{
       width: 45rem;
-      height: 30rem;
+      height: auto;
       img {
         width: 80px;
         height: 80px;
         margin: 1rem auto;
       }
 
-      label {
+      .form--heading {
         font-size: 1rem;
       }
 
@@ -210,7 +266,7 @@
         margin: .5rem auto;
       }
 
-      label {
+      .form--heading {
         font-size: 1rem;
       }
 
@@ -233,7 +289,7 @@
     .signupForm{
       width: 90%;
 
-      label {
+      .form--heading {
         font-size: 1rem;
       }
 
@@ -254,7 +310,6 @@
 @media screen and (max-width: 750px) {
   .loginContainer{
     .signupForm{
-      overflow-y: scroll;
       .column{
         float: none;
         width: 100%;
@@ -293,7 +348,7 @@
         margin: .2rem auto;
       }
 
-      label {
+      .form--heading {
         font-size: 1rem;
       }
 
