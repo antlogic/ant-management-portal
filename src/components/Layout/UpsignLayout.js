@@ -1,10 +1,10 @@
 import React from 'react';
 import { Layout } from "antd";
+import "./UpsignLayout.scss";
+
 const { Header, Content, Footer } = Layout;
 
 const UpsignLayout = (props) => {
-    const Navigation = props.children[0]
-    console.log(Navigation)
     return (
         <Layout className="layout">
             <Header style={{ padding: 0 }}>

@@ -7,6 +7,8 @@ const initialState = {
     loading: false,
     loggedIn: sessionStorage.getItem("loggedIn"),
     locations: sessionStorage.getItem("locations"),
+    firstName: sessionStorage.getItem("firstName"),
+    lastName: sessionStorage.getItem("lastName"),
 };
 
 const authStart = ( state, action ) => {
@@ -22,13 +24,15 @@ const authSuccess = (state, action) => {
     const isLoggedIn = action.authData.error == null
     sessionStorage.setItem("loggedIn", true);
     sessionStorage.setItem("token", CryptoJS.AES.encrypt(action.authData.tokenType + " " + action.authData.accessToken, "noOne Cancrack myKey"));
-    // const bytes = CryptoJS.AES.decrypt(sessionStorage.getItem("token").toString(), "noOne Cancrack myKey");
-    // console.log(bytes.toString(CryptoJS.enc.Utf8));
+    sessionStorage.setItem("firstName", action.authData.firstName);
+    sessionStorage.setItem("lastName", action.authData.lastName)
 
     return updateObject( state, {
         error: null,
         loading: false,
-        loggedIn: isLoggedIn
+        loggedIn: isLoggedIn,
+        firstName: action.authData.firstName,
+        lastname: action.authData.lastName
     } );
 };
 
@@ -75,6 +79,8 @@ const logout = (state) => {
     sessionStorage.setItem("loggedIn", false);
     sessionStorage.setItem("locations", null);
     sessionStorage.setItem("token", "");
+    sessionStorage.setItem("firstName", "");
+    sessionStorage.setItem("lastName", "")
 
     return updateObject( state, { loggedIn: false, locations: null } );
 }

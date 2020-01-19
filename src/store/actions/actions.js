@@ -64,7 +64,7 @@ export const GetRequest = (to) => {
                 },
             })
             .then(response => {
-                console.log(response)
+                // console.log(response)
                 dispatch(getLocations(response.data))
             })
             .catch(err => {
@@ -88,7 +88,7 @@ export const SetRequest = (to, config) => {
                 },
             })
             .then(response => {
-                console.log(response)
+                // console.log(response)
                 dispatch(SetLocation(response.data))
             })
             .catch(err => {
