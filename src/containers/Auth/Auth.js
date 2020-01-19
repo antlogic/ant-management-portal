@@ -3,7 +3,7 @@ import Input from "../../components/Input/Input";
 import {Link} from "react-router-dom";
 import { connect } from 'react-redux';
 import * as actions from "../../store/actions/auth";
-import Logo from '../../assets/images/logo/logo_white.png'
+import Logo from '../../assets/images/logo/UpSign_Logo.svg'
 import "./auth.scss"
 import {Spinner} from "react-bootstrap";
 import Aux from '../../hoc/Aux/Aux'
@@ -109,7 +109,7 @@ class Auth extends Component {
                     elementType: 'input',
                     elementConfig: {
                         type: 'password',
-                        placeholder: 'Re-Enter Password'
+                        placeholder: 'Confirm Password'
                     },
                     value: '',
                     isRequired: true,
@@ -120,7 +120,6 @@ class Auth extends Component {
     }
 
     isInvalid(value, type){
-        console.log("type is " + /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value))
         switch (type) {
             case 'text':
                 return !value
@@ -212,7 +211,6 @@ class Auth extends Component {
             <Aux>
                 {formInputArray.map(formInput => (
                     <div key={formInput.id} className="column form__group">
-                        {/*{console.log(formInput)}*/}
                         <Input
                             elementType={formInput.config.elementType}
                             elementConfig={formInput.config.elementConfig}

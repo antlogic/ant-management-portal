@@ -25,8 +25,8 @@ export const auth = (config, isLogin) => {
     return dispatch => {
         dispatch(authStart());
         const url = isLogin ?
-            "https://antlogic-backend-services.herokuapp.com/antlogic/api/auth/signin" :
-            "https://antlogic-backend-services.herokuapp.com/antlogic/api/auth/signup";
+            "https://antlogic-backend-services.herokuapp.com/upsign/v1/auth/signin" :
+            "https://antlogic-backend-services.herokuapp.com/upsign/v1/auth/signup";
 
         const headers = {
             headers: config.headers

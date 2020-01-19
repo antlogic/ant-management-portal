@@ -1,0 +1,35 @@
+.navbar{
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: inline-block;
+}
+
+.logo {
+  width: 3.5rem;
+  margin: 0 2rem;
+  padding-top: .3rem;
+}
+
+.ant-layout-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  padding: 0px;
+  display: inline-flex;
+  height: 5rem;
+  border-bottom: gray 1px solid;
+
+  ul{
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+.ant-layout-content{
+  margin-top: 5rem;
+}

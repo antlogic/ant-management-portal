@@ -77,14 +77,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background:
-            linear-gradient(
-                            to right,
-                            rgba(black, .75),
-                            rgba(black, .75)
-            ),
-            url("../../assets/images/hero/mountain-backdrop.jpg") center top;
-    background-size: cover;
+    background-color: white;
 
     .loginForm{
         overflow-y: scroll;
@@ -115,7 +108,7 @@
 
     form {
         display: block;
-        background-color: darken(#323c48, 4%);
+        background-color: lighten(#323c48, 5%);
         border-radius: 10%;
         position: absolute;
         overflow-y: scroll;
@@ -152,6 +145,7 @@
             width: 90px;
             height: 80px;
             margin: 1rem auto;
+            color: white;
         }
 
         .form--heading {
