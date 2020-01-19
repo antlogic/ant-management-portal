@@ -4,7 +4,7 @@ import './assets/stylesheets/main.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/css/font-awesome.min.css';
 import Page from "./containers/Page/Page";
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import reducer from "./store/reducers/reducer";
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk';
