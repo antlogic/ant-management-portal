@@ -27,8 +27,8 @@ class Page extends Component {
     }
 
     render() {
-        console.log(this.props)
-        const pageRoutes = this.props.authenticated !== true ?
+        console.log( this.props.authenticated )
+        const pageRoutes = ( (this.props.authenticated !== true) && (this.props.authenticated !== "true") ) ?
             <Switch>
                 <Route path="/login" exact component={Login} />
                 <Route path="/register" exact component={SignUp} />

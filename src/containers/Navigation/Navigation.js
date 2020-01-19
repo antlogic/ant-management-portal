@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import "./navigation.scss"
 import Logo from "../../assets/images/logo/UpSign_Symbol1.svg"
-import { Menu } from "antd"
+import { Menu, Button, Drawer } from "antd"
 import Aux from "../../hoc/Aux/Aux"
 import * as actions from "../../store/actions/actions";
 import {connect} from "react-redux";
@@ -11,13 +11,45 @@ class Navigation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            current: 'dashboard'
+            current: 'dashboard',
+            visible: false,
+            mobile: false
         }
+    }
+
+    updateDimensions = () => {
+        if(window.innerWidth < 800) {
+            this.setState({
+                mobile: true,
+                visible: false
+            });
+        } else {
+            this.setState({
+                mobile: false,
+                visible: true
+            });
+        }
+    }
+
+    /**
+     * Add event listener
+     */
+    componentDidMount() {
+        this.updateDimensions();
+        window.addEventListener("resize", this.updateDimensions.bind(this));
+    }
+
+    /**
+     * Remove event listener
+     */
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.updateDimensions.bind(this));
     }
 
     handleClick = e => {
         this.setState({
             current: e.key,
+            visible: false
         });
     };
 
@@ -25,18 +57,33 @@ class Navigation extends Component {
         this.props.logOut()
     }
 
+    handleMenuClick = () => {
+        this.setState({
+            visible: !this.state.visible
+        });
+    };
+    onClose = () => {
+        this.setState({
+            visible: false,
+        });
+    };
+
 
     render() {
+        const home = {key: "dashboard"}
         return (
             <Aux>
                 <div className="logo">
-                    <img src={Logo} className="logo" alt="logo"/>
+                    <Link to="/dashboard" onClick={() => this.handleClick(home)}><img src={Logo} className="logo" alt="logo"/></Link>
                 </div>
+                <div className={"hamburger-icon" + (this.state.visible ? " open" : "")} onClick={this.handleMenuClick}/>
                 <Menu theme="light"
-                      mode="horizontal"
+                      mode={(this.state.visible && this.state.mobile) ? "block" : "horizontal"}
                       style={{ lineHeight: '64px' }}
                       onClick={this.handleClick}
-                      selectedKeys={[this.state.current]}>
+                      selectedKeys={[this.state.current]}
+                      className={(!this.state.visible && this.state.mobile) ? "hidden" : ""}>
+
                     <Menu.Item key="dashboard">
                         <Link to="/dashboard" >
                             Dashboard
@@ -62,6 +109,8 @@ class Navigation extends Component {
                     </Menu.Item>
 
                 </Menu>
+
+                <Redirect to={"/" + this.state.current} />
             </Aux>
         );
     }
