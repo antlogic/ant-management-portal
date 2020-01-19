@@ -30,7 +30,7 @@ class Navigation extends Component {
         return (
             <Aux>
                 <div className="logo">
-                    <img src={Logo} className="logo" />
+                    <img src={Logo} className="logo" alt="logo"/>
                 </div>
                 <Menu theme="light"
                       mode="horizontal"

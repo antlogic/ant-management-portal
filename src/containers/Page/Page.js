@@ -9,7 +9,6 @@ import {
     Switch
 } from "react-router-dom";
 import Navigation from "../Navigation/Navigation"
-import Aux from "../../hoc/Aux/Aux"
 import Dashboard from "../../components/Dashboard/Dashboard";
 import Locations from "../Locations/Locations";
 import Users from "../../components/Users/Users";
@@ -21,14 +20,15 @@ class Page extends Component {
     constructor(props) {
         super(props);
         if (window.performance) {
-            if (performance.navigation.type == 1) {
+            if (performance.navigation.type === 1) {
                 // alert( "This page is reloaded" );
             }
         }
     }
 
     render() {
-        const pageRoutes = ! this.props.authenticated ?
+        console.log(this.props)
+        const pageRoutes = this.props.authenticated !== true ?
             <Switch>
                 <Route path="/login" exact component={Login} />
                 <Route path="/register" exact component={SignUp} />
