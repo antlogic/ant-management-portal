@@ -27,7 +27,6 @@ class Page extends Component {
     }
 
     render() {
-        console.log( this.props.authenticated )
         const pageRoutes = ( (this.props.authenticated !== true) && (this.props.authenticated !== "true") ) ?
             <Switch>
                 <Route path="/login" exact component={Login} />
@@ -40,7 +39,7 @@ class Page extends Component {
                 <Navigation/>
                 <Switch>
                     <Route path="/dashboard" component={Dashboard} />
-                    <Route path="/locations" component={Locations} />
+                    <Route path="/stores" component={Locations} />
                     <Route path="/users" component={Users} />
                     <Route path="/media" component={Media} />
                     <Redirect from="/" to="/dashboard" component={Dashboard}/>

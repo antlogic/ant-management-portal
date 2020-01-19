@@ -1,5 +1,7 @@
 import React from 'react';
 import { Layout } from "antd";
+import "./UpsignLayout.scss";
+
 const { Header, Content, Footer } = Layout;
 
 const UpsignLayout = (props) => {

@@ -13,7 +13,8 @@ class Navigation extends Component {
         this.state = {
             current: 'dashboard',
             visible: false,
-            mobile: false
+            mobile: false,
+            logoutVisible: false,
         }
     }
 
@@ -21,12 +22,14 @@ class Navigation extends Component {
         if(window.innerWidth < 800) {
             this.setState({
                 mobile: true,
-                visible: false
+                visible: false,
+                logoutVisible: true
             });
         } else {
             this.setState({
                 mobile: false,
-                visible: true
+                visible: true,
+                logoutVisible: false
             });
         }
     }
@@ -62,9 +65,9 @@ class Navigation extends Component {
             visible: !this.state.visible
         });
     };
-    onClose = () => {
+    handleLogoutClick = () => {
         this.setState({
-            visible: false,
+            logoutVisible: !this.state.logoutVisible,
         });
     };
 
@@ -89,9 +92,9 @@ class Navigation extends Component {
                             Dashboard
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="locations">
-                        <Link to="/locations" >
-                            Locations
+                    <Menu.Item key="stores">
+                        <Link to="/stores" >
+                            Stores
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="users">
@@ -104,11 +107,27 @@ class Navigation extends Component {
                             Media
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key={"hey there"} onClick={this.handleLogout}>
-                        Logout
+
+                    <Menu.Item
+                        onClick={this.handleLogoutClick}>
+                        <div className={this.state.mobile ? "" : "hidden"}>
+                            Logout
+                        </div>
                     </Menu.Item>
 
                 </Menu>
+
+                <div className="profile" onClick={this.handleLogoutClick}>
+                    <i className="fa fa-user-circle"></i>
+                    <label className="userName">
+                        {"Hi " + this.props.firstName + "!"}
+                    </label>
+                    <div
+                        className={"logoutItem ant-menu-item" + (this.state.logoutVisible ? "" : " hidden")}
+                        onClick={this.handleLogout}>
+                        Logout
+                    </div>
+                </div>
 
                 <Redirect to={"/" + this.state.current} />
             </Aux>
@@ -116,10 +135,17 @@ class Navigation extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        firstName: state.firstName,
+        lastName: state.lastName,
+    }
+};
+
 const mapDispatchToProps = dispatch => {
     return {
         logOut: () => dispatch(actions.logOut())
     };
 };
 
-export default connect(null, mapDispatchToProps)(Navigation)
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation)

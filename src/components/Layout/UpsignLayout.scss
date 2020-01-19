@@ -1,0 +1,15 @@
+.ant-layout-content{
+  min-height: 100vh;
+}
+
+.ant-empty{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.center-empty {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+}
