@@ -197,7 +197,7 @@ class Locations extends Component {
                 <List.Item>
                     <Card title={item.name}>
                         <CardDetails title="Displays:" data={item.numberOfDisplays}/>
-                        <CardDetails title="Last Updated:" data={new Date(item.updatedAt).toLocaleDateString()}/>
+                        <CardDetails title="Last Updated:" data={item.updatedAt} isDate={true}/>
                     </Card>
                 </List.Item>
             )}
