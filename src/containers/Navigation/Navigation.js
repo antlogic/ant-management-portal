@@ -50,10 +50,14 @@ class Navigation extends Component {
     }
 
     handleClick = e => {
-        this.setState({
-            current: e.key,
-            visible: false
-        });
+        if(e.key == "logout"){
+            this.handleLogout()
+        } else {
+            this.setState({
+                current: e.key,
+                visible: false
+            });
+        }
     };
 
     handleLogout = () => {
@@ -108,8 +112,7 @@ class Navigation extends Component {
                         </Link>
                     </Menu.Item>
 
-                    <Menu.Item
-                        onClick={this.handleLogoutClick}>
+                    <Menu.Item key="logout">
                         <div className={this.state.mobile ? "" : "hidden"}>
                             Logout
                         </div>
