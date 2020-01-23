@@ -113,7 +113,8 @@ const logout = (state) => {
     sessionStorage.setItem("locations", null);
     sessionStorage.setItem("token", "");
     sessionStorage.setItem("firstName", "");
-    sessionStorage.setItem("lastName", "")
+    sessionStorage.setItem("lastName", "");
+    sessionStorage.setItem("url", "")
 
     return updateObject( state, { loggedIn: false, locations: null } );
 }
