@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link, Redirect} from "react-router-dom";
 import "./navigation.scss"
 import Logo from "../../assets/images/logo/UpSign_Symbol1.svg"
-import { Menu, Button, Drawer } from "antd"
+import { Menu } from "antd"
 import Aux from "../../hoc/Aux/Aux"
 import * as actions from "../../store/actions/actions";
 import {connect} from "react-redux";
@@ -10,8 +10,10 @@ import {connect} from "react-redux";
 class Navigation extends Component {
     constructor(props) {
         super(props);
+        const url = sessionStorage.getItem("url")
+        const cur = ( (url !== null) && (url !== "") ) ? url : "dashboard"
         this.state = {
-            current: 'dashboard',
+            current: cur,
             visible: false,
             mobile: false,
             logoutVisible: false,
@@ -50,9 +52,10 @@ class Navigation extends Component {
     }
 
     handleClick = e => {
-        if(e.key == "logout"){
+        if(e.key === "logout"){
             this.handleLogout()
         } else {
+            sessionStorage.setItem("url", e.key)
             this.setState({
                 current: e.key,
                 visible: false

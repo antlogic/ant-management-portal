@@ -6,7 +6,8 @@ const initialState = {
     error: null,
     loading: false,
     loggedIn: sessionStorage.getItem("loggedIn"),
-    locations: sessionStorage.getItem("locations"),
+    locations: JSON.parse(sessionStorage.getItem("locations")),
+    displays: null,
     firstName: sessionStorage.getItem("firstName"),
     lastName: sessionStorage.getItem("lastName"),
 };
@@ -60,20 +61,52 @@ const setFail = ( state, action ) => {
     return updateObject( state, { loading: false, error: action.error } );
 };
 
-const updateLocation = ( state, action ) => {
-    sessionStorage.setItem("locations", action.data.locations)
-    console.log(action.data.locations)
+// const updateLocation = ( state, action ) => {
+//     sessionStorage.setItem("locations", JSON.stringify( action.data.locations ) )
+//
+//     let tempState = updateObject( state,
+//         {
+//             loading: false
+//         });
+//     tempState.locations = {
+//         ...action.data.locations
+//     };
+//
+//     return tempState
+// };
+//
+// const updateDisplays = ( state, action ) => {
+//     sessionStorage.setItem("displays", JSON.stringify( action.data.displays ) )
+//
+//     let tempState = updateObject( state,
+//         {
+//             loading: false
+//         });
+//     tempState.locations = {
+//         ...action.data.locations
+//     };
+//
+//     return tempState
+// };
+
+const update = (state, action, name) =>{
+    sessionStorage.setItem(name, JSON.stringify( action.data[name] ) )
+
+    if(name === "displays") console.log(action);
 
     let tempState = updateObject( state,
         {
             loading: false
         });
-    tempState.locations = {
-        ...action.data.locations
+    tempState[name] = {
+        ...action.data[name]
     };
 
+    // console.log("State afterwards")
+    // console.log(tempState);
+
     return tempState
-};
+}
 
 const logout = (state) => {
     sessionStorage.setItem("loggedIn", false);
@@ -92,8 +125,10 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.AUTH_FAIL: return authFail(state, action);
         case actionTypes.GET_START: return getStart(state, action);
         case actionTypes.GET_FAIL: return getFail(state, action);
-        case actionTypes.GET_LOCATIONS: return updateLocation(state, action);
-        case actionTypes.SET_LOCATION: return updateLocation(state, action);
+        case actionTypes.GET_LOCATIONS: return update(state, action, "locations");
+        case actionTypes.SET_LOCATION: return update(state, action, "locations");
+        case actionTypes.GET_DISPLAYS: return update(state, action, "displays");
+        case actionTypes.SET_DISPLAYS: return update(state, action, "displays");
         case actionTypes.SET_START: return setStart(state, action);
         case actionTypes.SET_FAIL: return setFail(state, action);
         case actionTypes.LOGOUT: return logout(state);

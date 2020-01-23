@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import { Button, Empty, List, Card } from "antd"
 import CardDetails from "../../components/CardDetails/CardDetails";
 import CustomModal from "../../components/UpsignModal/CustomModal";
+import {Link} from "react-router-dom";
 
 class Locations extends Component {
     constructor(props) {
@@ -181,9 +182,9 @@ class Locations extends Component {
         const { locations } = this.props;
         const { columns } = this.state;
 
-        const myLocations = locations !== null ? Object.keys(locations).map(i => locations[i]) : [];
+        console.log(locations)
 
-        console.log(myLocations)
+        const myLocations = locations !== null ? Object.keys(locations).map(i => locations[i]) : [];
 
         const list = myLocations.length > 0 ? <List
             style={{padding: "3.5rem" }}
@@ -195,10 +196,14 @@ class Locations extends Component {
             dataSource={myLocations}
             renderItem={item => (
                 <List.Item>
-                    <Card title={item.name}>
-                        <CardDetails title="Displays:" data={item.numberOfDisplays}/>
-                        <CardDetails title="Last Updated:" data={item.updatedAt} isDate={true}/>
-                    </Card>
+                    <Link to={"/stores/" + item.locationId} >
+                        <Card title={item.name}>
+                            <CardDetails title="Displays:" data={item.numberOfDisplays}/>
+                            <CardDetails title="Created By:" data={item.createdBy}/>
+                            <CardDetails title="Updated By:" data={item.updatedBy}/>
+                            <CardDetails title="Last Updated:" data={item.updatedAt} isDate={true}/>
+                        </Card>
+                    </Link>
                 </List.Item>
             )}
         /> : null
@@ -206,7 +211,7 @@ class Locations extends Component {
         return (
             <Aux>
                 {list}
-                <div className={myLocations.length == 0 ? "center-empty" : "" } >
+                <div className={myLocations.length === 0 ? "center-empty" : "" } >
                     <Empty
                         image="https://gw.alipayobjects.com/mdn/miniapp_social/afts/img/A*pevERLJC9v0AAAAAAAAAAABjAQAAAQ/original"
                         imageStyle={

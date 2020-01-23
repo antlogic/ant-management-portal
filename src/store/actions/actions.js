@@ -36,10 +36,25 @@ export const getLocations = (locations) => {
     }
 }
 
-export const SetLocation = (locations) => {
+export const setLocation = (locations) => {
     return {
         type: actionTypes.SET_LOCATION,
         data: locations
+    }
+}
+
+export const getDisplays = (displays) => {
+
+    return {
+        type: actionTypes.GET_DISPLAYS,
+        data: displays
+    }
+}
+
+export const setDisplays = (displays) => {
+    return {
+        type: actionTypes.SET_DISPLAYS,
+        data: displays
     }
 }
 
@@ -64,8 +79,14 @@ export const GetRequest = (to) => {
                 },
             })
             .then(response => {
-                // console.log(response)
-                dispatch(getLocations(response.data))
+                const toArray = to.split("/");
+                console.log(toArray[toArray.length - 1])
+
+                if(toArray[toArray.length - 1] === "locations") {
+                    dispatch(getLocations(response.data))
+                } else if(toArray[toArray.length - 1] === "displays") {
+                    dispatch(getDisplays(response.data))
+                }
             })
             .catch(err => {
                 console.log(err)
@@ -89,7 +110,7 @@ export const SetRequest = (to, config) => {
             })
             .then(response => {
                 // console.log(response)
-                dispatch(SetLocation(response.data))
+                dispatch(setLocation(response.data))
             })
             .catch(err => {
                 console.log(err)

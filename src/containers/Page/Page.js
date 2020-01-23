@@ -14,6 +14,7 @@ import Locations from "../Locations/Locations";
 import Users from "../../components/Users/Users";
 import Media from "../../components/Media/Media";
 import UpsignLayout from "../../components/Layout/UpsignLayout";
+import Displays from "../Displays/Displays";
 
 
 class Page extends Component {
@@ -39,7 +40,8 @@ class Page extends Component {
                 <Navigation/>
                 <Switch>
                     <Route path="/dashboard" component={Dashboard} />
-                    <Route path="/stores" component={Locations} />
+                    <Route path="/stores" exact component={Locations} />
+                    <Route path="/stores/:locationId" exact component={Displays} />
                     <Route path="/users" component={Users} />
                     <Route path="/media" component={Media} />
                     <Redirect from="/" to="/dashboard" component={Dashboard}/>
