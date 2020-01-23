@@ -1,5 +1,5 @@
 .ant-layout-content{
-  min-height: 100vh;
+  min-height: calc(100vh - 8rem);
 }
 
 .ant-empty{
@@ -12,4 +12,14 @@
   top: 50%;
   transform: translate(-50%, -50%);
   position: absolute;
+}
+
+.ant-list-item{
+  a{
+    text-decoration: none;
+  }
+
+  &:hover{
+    box-shadow: 0px 5px 5px 5px lightgrey;
+  }
 }
