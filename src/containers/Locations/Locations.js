@@ -182,8 +182,6 @@ class Locations extends Component {
         const { locations } = this.props;
         const { columns } = this.state;
 
-        console.log(locations)
-
         const myLocations = locations !== null ? Object.keys(locations).map(i => locations[i]) : [];
 
         const list = myLocations.length > 0 ? <List
@@ -200,8 +198,8 @@ class Locations extends Component {
                         <Card title={item.name}>
                             <CardDetails title="Displays:" data={item.numberOfDisplays}/>
                             <CardDetails title="Created By:" data={item.createdBy}/>
-                            <CardDetails title="Updated By:" data={item.updatedBy}/>
                             <CardDetails title="Last Updated:" data={item.updatedAt} isDate={true}/>
+                            <CardDetails title="Updated By:" data={item.updatedBy}/>
                         </Card>
                     </Link>
                 </List.Item>

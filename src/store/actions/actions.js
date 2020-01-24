@@ -58,6 +58,21 @@ export const setDisplays = (displays) => {
     }
 }
 
+export const getImages = (displays) => {
+
+    return {
+        type: actionTypes.GET_IMAGES,
+        data: displays
+    }
+}
+
+export const setImages = (displays) => {
+    return {
+        type: actionTypes.SET_IMAGES,
+        data: displays
+    }
+}
+
 export const logOutUser = () => {
     return {
         type: actionTypes.LOGOUT
@@ -80,12 +95,13 @@ export const GetRequest = (to) => {
             })
             .then(response => {
                 const toArray = to.split("/");
-                console.log(toArray[toArray.length - 1])
 
                 if(toArray[toArray.length - 1] === "locations") {
                     dispatch(getLocations(response.data))
                 } else if(toArray[toArray.length - 1] === "displays") {
                     dispatch(getDisplays(response.data))
+                } else if(toArray[toArray.length - 1] === "images") {
+                    dispatch(getImages(response.data))
                 }
             })
             .catch(err => {
@@ -95,7 +111,7 @@ export const GetRequest = (to) => {
     }
 }
 
-export const SetRequest = (to, config) => {
+export const SetRequest = (to, data) => {
     return dispatch => {
         dispatch(setStart());
         const url = "https://antlogic-backend-services.herokuapp.com/upsign/v1/" + to;
@@ -103,14 +119,19 @@ export const SetRequest = (to, config) => {
 
         axios.post(
             url,
-            config,{
+            data,{
                 headers:{
                     Authorization: CryptoJS.AES.decrypt(bytes.toString(), "noOne Cancrack myKey").toString(CryptoJS.enc.Utf8)
                 },
             })
             .then(response => {
+                const toArray = to.split("/");
                 // console.log(response)
-                dispatch(setLocation(response.data))
+                if(toArray[toArray.length - 1] === "locations") {
+                    dispatch(setLocation(response.data))
+                } else if(toArray[toArray.length - 1] === "images") {
+                    dispatch(setImages(response.data))
+                }
             })
             .catch(err => {
                 console.log(err)

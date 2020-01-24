@@ -9,6 +9,8 @@ export const GET_LOCATIONS = 'GET_LOCATIONS';
 export const SET_LOCATION = 'SET_LOCATION';
 export const GET_DISPLAYS = 'GET_DISPLAYS';
 export const SET_DISPLAYS = 'SET_DISPLAYS';
+export const GET_IMAGES = 'GET_IMAGES';
+export const SET_IMAGES = 'SET_IMAGES';
 export const GET_SLIDES = 'GET_SLIDES';
 export const SET_SLIDE = 'SET_SLIDE';
 
