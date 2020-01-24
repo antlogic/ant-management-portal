@@ -7,6 +7,7 @@ const initialState = {
     loading: false,
     loggedIn: sessionStorage.getItem("loggedIn"),
     locations: JSON.parse(sessionStorage.getItem("locations")),
+    images: JSON.parse(sessionStorage.getItem("images")),
     displays: null,
     firstName: sessionStorage.getItem("firstName"),
     lastName: sessionStorage.getItem("lastName"),
@@ -92,7 +93,6 @@ const setFail = ( state, action ) => {
 const update = (state, action, name) =>{
     sessionStorage.setItem(name, JSON.stringify( action.data[name] ) )
 
-    if(name === "displays") console.log(action);
 
     let tempState = updateObject( state,
         {
@@ -130,6 +130,8 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.SET_LOCATION: return update(state, action, "locations");
         case actionTypes.GET_DISPLAYS: return update(state, action, "displays");
         case actionTypes.SET_DISPLAYS: return update(state, action, "displays");
+        case actionTypes.GET_IMAGES: return update(state, action, "images");
+        case actionTypes.SET_IMAGES: return update(state, action, "images");
         case actionTypes.SET_START: return setStart(state, action);
         case actionTypes.SET_FAIL: return setFail(state, action);
         case actionTypes.LOGOUT: return logout(state);

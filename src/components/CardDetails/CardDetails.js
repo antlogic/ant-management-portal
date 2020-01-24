@@ -7,7 +7,7 @@ const CardDetails = (props) => {
 
     const displayDate = ( ( updated.getMonth() + 1 ) + "/" + updated.getDate() + "/" + updated.getFullYear() );
     return (
-        <div className="card-square">
+        <div className={"card-square" + " " + props.cssClass} >
             <label className="item-title">
                 {props.title}
             </label>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Dropzone from 'react-dropzone'
-import DisplayImg from './DisplayImg'
+import DisplayImg from '../../components/DisplayImage/DisplayImg'
 import {
     BrowserRouter as Router,
     Redirect,
@@ -9,7 +9,7 @@ import {
     Switch
 } from "react-router-dom";
 import Login from "../../components/Auth/Login";
-import SecureMessage from "./SecureMessage";
+import {Button, Empty} from 'antd'
 
 const acceptedFileTypes = 'image/x-png, image/png, image/jpg, image/jpeg, image/gif'
 const acceptedFileTypesArray = acceptedFileTypes.split(",").map((item) => {return item.trim()})
@@ -69,10 +69,6 @@ class ImgUpload extends Component {
     }
   }
 
-  signOut = () => {
-
-  }
-
   render () {
     const {ImgArray} = this.state
 
@@ -90,9 +86,7 @@ class ImgUpload extends Component {
     } else {
       return (
           <div>
-            <Link to='/login' onClick={this.signOut}>Sign Out</Link>
 
-            <SecureMessage/>
             {ImgArray.map((item, index) =>
                 <DisplayImg
                     ImgItem={item}
@@ -109,7 +103,20 @@ class ImgUpload extends Component {
                   <section>
                     <div {...getRootProps()}>
                       <input {...getInputProps()} />
-                      <p>Drag 'n' drop some files here, or click to select files</p>
+                        <Empty
+                            image="https://gw.alipayobjects.com/mdn/miniapp_social/afts/img/A*pevERLJC9v0AAAAAAAAAAABjAQAAAQ/original"
+                            imageStyle={
+                                ImgArray.length === 0 ?
+                                    {height: 60} : {height: 0}
+                            }
+                            description={
+                                <span>
+                                {ImgArray.length === 0 ? "No images available" : ""}
+                            </span>
+                            }
+                        >
+                            <Button type="primary">Add Image</Button>
+                        </Empty>
                     </div>
                   </section>
               )}

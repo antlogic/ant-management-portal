@@ -12,7 +12,7 @@ import Navigation from "../Navigation/Navigation"
 import Dashboard from "../../components/Dashboard/Dashboard";
 import Locations from "../Locations/Locations";
 import Users from "../../components/Users/Users";
-import Media from "../../components/Media/Media";
+import Media from "../Media/Media";
 import UpsignLayout from "../../components/Layout/UpsignLayout";
 import Displays from "../Displays/Displays";
 
