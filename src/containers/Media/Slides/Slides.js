@@ -168,7 +168,7 @@ class Slides extends Component {
             renderItem={slide => (
                 <List.Item>
                     <Link to={"media"} >
-                        <Card cover={<img src={slide.image.url} alt="img" />} >
+                        <Card cover={<img className="imageCardCover" src={slide.image.url} alt="img" />} >
                             <CardDetails title="Name:" data={slide.name} cssClass="full-width"/>
                             <CardDetails title="Width:" data={slide.image.width}/>
                             <CardDetails title="Height:" data={slide.image.height}/>

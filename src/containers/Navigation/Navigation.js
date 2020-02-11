@@ -109,8 +109,8 @@ class Navigation extends Component {
                             Users
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="media">
-                        <Link to="/media" >
+                    <Menu.Item key="media/images">
+                        <Link to="/media/images" >
                             Media
                         </Link>
                     </Menu.Item>

@@ -67,7 +67,7 @@ class Images extends Component {
             renderItem={image => (
                 <List.Item>
                     <Link to={"media"} >
-                        <Card cover={<img src={image.url} alt="img" />} >
+                        <Card cover={<img className="imageCardCover" src={image.url} alt="img" />} >
                             <CardDetails title="Name:" data={image.imageId} cssClass="full-width"/>
                             <CardDetails title="Width:" data={image.width}/>
                             <CardDetails title="Height:" data={image.height}/>
