@@ -8,6 +8,7 @@ const initialState = {
     loggedIn: sessionStorage.getItem("loggedIn"),
     locations: JSON.parse(sessionStorage.getItem("locations")),
     images: JSON.parse(sessionStorage.getItem("images")),
+    slides: JSON.parse(sessionStorage.getItem("slides")),
     displays: null,
     firstName: sessionStorage.getItem("firstName"),
     lastName: sessionStorage.getItem("lastName"),
@@ -132,6 +133,8 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.SET_DISPLAYS: return update(state, action, "displays");
         case actionTypes.GET_IMAGES: return update(state, action, "images");
         case actionTypes.SET_IMAGES: return update(state, action, "images");
+        case actionTypes.GET_SLIDES: return update(state, action, "slides");
+        case actionTypes.SET_SLIDE: return update(state, action, "slides");
         case actionTypes.SET_START: return setStart(state, action);
         case actionTypes.SET_FAIL: return setFail(state, action);
         case actionTypes.LOGOUT: return logout(state);

@@ -23,6 +23,7 @@ class CustomModal extends Component {
                 footer={<Button onClick={() => this.props.button()} type="primary">Submit</Button>}
             >
                 {form}
+                {this.props.children}
             </Modal>
         );
     }

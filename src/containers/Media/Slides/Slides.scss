@@ -1,0 +1,13 @@
+.imagePicker {
+  margin: 1rem;
+  cursor: pointer;
+
+  &.selected{
+    border: 8px solid green;
+  }
+}
+
+.imageCarousel{
+  white-space: nowrap;
+  overflow-x: scroll;
+}

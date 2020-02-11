@@ -42,10 +42,11 @@ class Page extends Component {
                     <Route path="/dashboard" component={Dashboard} />
                     <Route path="/stores" exact component={Locations} />
                     <Route path="/stores/:locationId" exact component={Displays} />
-                    <Route path="/users" component={Users} />
                     <Route path="/media" component={Media} />
+                    <Route path="/users" component={Users} />
                     <Redirect from="/" to="/dashboard" component={Dashboard}/>
                 </Switch>
+                <Redirect from="/media" to="/media/images" />
             </UpsignLayout>
 
 

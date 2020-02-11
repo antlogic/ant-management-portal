@@ -73,6 +73,21 @@ export const setImages = (displays) => {
     }
 }
 
+export const getSlides = (displays) => {
+
+    return {
+        type: actionTypes.GET_SLIDES,
+        data: displays
+    }
+}
+
+export const setSlides = (displays) => {
+    return {
+        type: actionTypes.SET_SLIDE,
+        data: displays
+    }
+}
+
 export const logOutUser = () => {
     return {
         type: actionTypes.LOGOUT
@@ -102,6 +117,8 @@ export const GetRequest = (to) => {
                     dispatch(getDisplays(response.data))
                 } else if(toArray[toArray.length - 1] === "images") {
                     dispatch(getImages(response.data))
+                } else if(toArray[toArray.length - 1] === "slides") {
+                    dispatch(getSlides(response.data))
                 }
             })
             .catch(err => {
@@ -131,6 +148,8 @@ export const SetRequest = (to, data) => {
                     dispatch(setLocation(response.data))
                 } else if(toArray[toArray.length - 1] === "images") {
                     dispatch(setImages(response.data))
+                } else if(toArray[toArray.length - 1] === "slides") {
+                    dispatch(setSlides(response.data))
                 }
             })
             .catch(err => {
